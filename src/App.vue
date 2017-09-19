@@ -1,14 +1,15 @@
 <template>
   <div id="app">
+    <template v-if="foll">
     <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <test></test>
+    <h1>{{ msg }} {{ test }}</h1>
+    </template>
+    <button v-on:click="foll = !foll">butt</button>
+    <test @klicked="callit"/>
+    <template v-if="foll">
     <h2>Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
     </ul>
     <h2>Ecosystem</h2>
     <ul>
@@ -17,22 +18,28 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+    </template>
+    <router-link to="/foo">Go to Foo</router-link>
+    <router-link to="/bar">Go to Bar</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 
-import Test from './Test.vue';
-
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      foll: false,
+      test: 0,
     }
   },
-  components: {
-    Test,
+  methods: {
+    callit: function(data) {
+	this.test = data;
+    }
   }
 }
 </script>
