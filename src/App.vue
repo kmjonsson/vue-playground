@@ -2,9 +2,13 @@
   <div id="app">
     <template v-if="foll">
     <img src="./assets/logo.png">
-    <h1>{{ msg }} {{ test }}</h1>
+    <h1>{{ msg }} {{ test }} {{ $store.state.count }}</h1>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <button @click="incrementIfOdd">Increment if odd</button>
+    <button @click="incrementAsync">Increment async</button>
     </template>
-    <button v-on:click="foll = !foll">butt</button>
+    <button v-on:click="foll = !foll">knapp</button>
     <test @klicked="callit"/>
     <template v-if="foll">
     <h2>Essential Links</h2>
@@ -26,25 +30,29 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      msg: 'velcome to Your Vue.js App',
       foll: false,
-      test: 0,
+      test: 0
     }
   },
-  methods: {
-    callit: function(data) {
-	this.test = data;
+  methods: Object.assign({},
+    mapActions([ 'increment', 'decrement', 'incrementIfOdd', 'incrementAsync' ]),
+    {
+	    callit(data) {
+		this.test = data;
+	    }
     }
-  }
+  )
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -1,15 +1,15 @@
 <template>
     <div>
-    <h1 @click="klick()">{{ msg }}</h1>  
+    <h1 @click="klick">{{ msg }}</h1>  
     </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      msg: 1
-    }
+  data () { 
+	return {
+	      msg: 1,
+	}
   },
   methods: {
     klick: function() {
